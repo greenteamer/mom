@@ -23,4 +23,6 @@ render(app, {
   debug: true,
 });
 
-app.listen(3000, () => console.log('* koa server running, port 3000'));
+port = process.env.PORT || 3000;
+
+app.listen(port, () => console.log('* koa server running, port ', port));
