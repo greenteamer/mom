@@ -1,6 +1,9 @@
 const Router = require('koa-router');
 const compose = require('koa-compose');
 
+
+const adminRoutes = require('./admin');
+
 const homeRoutes = require('./home');
 const usersRoutes = require('./users');
 const resumeRoutes = require('./resume');
@@ -11,6 +14,9 @@ const contactRoutes = require('./contact');
 
 
 module.exports = compose([
+  adminRoutes.routes(),
+  adminRoutes.allowedMethods(),
+
   homeRoutes.routes(),
   homeRoutes.allowedMethods(),
   usersRoutes.routes(),

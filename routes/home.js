@@ -5,7 +5,7 @@ const router = new Router();
 
 module.exports = router
   .get('/', async (ctx, next) => {
-    await ctx.render('home');
+    await ctx.render('home', { message: 'hello message' });
     await next();
   })
   .post('/', async (ctx, next) => {
