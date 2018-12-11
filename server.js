@@ -15,7 +15,7 @@ app.use(serve('.'));
 app.use(serve(__dirname + '/public'));
 
 // routes
-app.use(routes);
+routes(app);
 
 // template ejs
 render(app, {

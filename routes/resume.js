@@ -1,10 +1,15 @@
 const Router = require('koa-router');
 
 
-const router = new Router();
+module.exports = function (app) {
+  const router = new Router();
 
-module.exports = router
-  .get('/resume', async (ctx, next) => {
-    await ctx.render('resume');
-    await next();
-  });
+  router
+    .get('/resume', async (ctx, next) => {
+      await ctx.render('resume');
+      await next();
+    })
+
+  app.use(router.routes());
+  app.use(router.allowedMethods());
+}

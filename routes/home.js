@@ -1,14 +1,22 @@
 const Router = require('koa-router');
+const axios = require('axios');
 
 
-const router = new Router();
+module.exports = function (app) {
+  const router = new Router();
 
-module.exports = router
-  .get('/', async (ctx, next) => {
-    await ctx.render('home', { message: 'hello message' });
-    await next();
-  })
-  .post('/', async (ctx, next) => {
-    ctx.body = 'Hello index post';
-    await next();
-  });
+  router
+    .get('/', async (ctx, next) => {
+      const pages = await axios.get('http://localhost:1337/pages');
+      console.log('>>> pages: ', { pages: pages.data });
+      await ctx.render('home', { pages: pages.data });
+      await next();
+    })
+    .post('/', async (ctx, next) => {
+      ctx.body = 'Hello index post';
+      await next();
+    });
+
+  app.use(router.routes());
+  app.use(router.allowedMethods());
+}
